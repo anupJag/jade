@@ -1,0 +1,257 @@
+properties([
+  buildDiscarder(logRotator(numToKeepStr: '3')),
+  disableConcurrentBuilds(),
+])
+
+def get_path(app) {
+  def path_map = [
+    "frontend": "frontend",
+    "graphql-content": "graphql/content",
+    "graphql-gateway": "graphql/gateway",
+    "graphql-order": "graphql/order",
+    "graphql-products": "graphql/products",
+    "graphql-user": "graphql/user"
+  ]
+  return path_map.get(app)
+}
+
+pipeline {
+  agent {
+      kubernetes {
+         label "jade"
+         yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: jenkins-pipeline
+spec:
+  securityContext:
+    runAsUser: 0
+    fsGroup: 0
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+  containers:
+  - name: jnlp
+    image: harbor.instg.pscloudhub.com/tools/jnlp-slave:pscode
+  - name: node12
+    image: node:12.18.2-alpine
+    command:
+    - cat
+    tty: true
+  - name: docker
+    image: docker
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+  - name: kube-tools
+    image: harbor.instg.pscloudhub.com/tools/kube-tools:1.14.2
+    imagePullPolicy: Always
+    command:
+    - cat
+    tty: true
+  - name: sonar-scanner-tools
+    image: harbor.instg.pscloudhub.com/tools/sonar-scanner-tools
+    imagePullPolicy: Always
+    command:
+    - cat
+    tty: true
+  - name: lighthouse
+    image: justinribeiro/lighthouse
+    command:
+    - cat
+    tty: true
+    securityContext:
+      capabilities:
+        add:
+          - SYS_ADMIN
+  - name: pa11y-ci
+    image: digitalist/pa11y-ci:latest
+    command:
+    - cat
+    tty: true
+"""
+          }
+  }
+
+  environment {
+    IMAGE_TAG = UUID.randomUUID().toString().take(6)
+    DOCKER_REGISTRY_URL = "harbor.instg.pscloudhub.com"
+    DOCKER_REGISTRY = "${DOCKER_REGISTRY_URL}/iris/"
+    NAMESPACE = "grocery-dev"
+    PATH_NAME = get_path(app)
+    TIME = currentBuild.getTimeInMillis()
+    FRONTEND_URL = "https://jade.instg.pscloudhub.com/"
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Build') {
+      steps {
+        container('node12') {
+          echo "Installing dependencies ..."
+          sh "yarn install"
+        }
+      }
+    }
+
+    // stage('Sonar Scan') {
+    //   steps {
+    //     container('sonar-scanner-tools'){
+    //       withSonarQubeEnv("sonar") {
+    //         sh """ sonar-scanner \\
+    //           -Dsonar.projectKey="jade" \\
+    //           -Dsonar.projectName="jade" \\
+    //           -Dproject.settings=sonar-project.properties \\
+    //           -Dsonar.sourceEncoding=UTF-8
+    //         """
+    //       }
+    //     }
+    //   }
+    // }
+
+    // stage('Unit Tests') {
+    //   steps {
+    //     container('node12') {
+
+    //       echo "Running tests ..."
+    //       // sh 'yarn nx test ${app}'
+    //     }
+    //   }
+    // }
+
+    // stage('Static Analysis') {
+    //   steps {
+    //     container('node12') {
+    //       echo "Linting files ..."
+    //       // sh 'yarn nx lint ${app}'
+    //     }
+    //   }
+    // }
+
+    stage('Prod build') {
+      steps {
+        container('node12') {
+          echo "Building ..."
+          sh "yarn nx build ${app} --prod"
+        }
+      }
+    }
+
+    stage('Docker: Build Image') {
+      steps {
+        container('docker') {
+          echo "Build and push docker images"
+          sh "docker build -f ./apps/${PATH_NAME}/Dockerfile -t iris/jade-${app}:${IMAGE_TAG} ."
+
+          }
+        }
+      }
+
+
+    stage('Push docker to Registry') {
+      steps {
+        container('docker') {
+          echo "Tagging docker images"
+          sh "docker tag iris/jade-${app}:${IMAGE_TAG} ${DOCKER_REGISTRY}jade-${app}:${IMAGE_TAG}"
+
+          withCredentials([usernamePassword(credentialsId: "iris-goharbor", passwordVariable: "registryPASS", usernameVariable: "registryUSER")]) {
+            sh "docker login --username=${registryUSER} --password=${registryPASS} ${DOCKER_REGISTRY_URL}"
+
+            sh "docker push ${DOCKER_REGISTRY}jade-${app}:${IMAGE_TAG}"
+          }
+        }
+      }
+    }
+
+
+    stage('Deployment') {
+      steps {
+        container('kube-tools') {
+          echo "Starting deployment in K8s cluster"
+          sh "kubectl apply -f ./apps/${PATH_NAME}/k8s"
+
+          sh "sleep 10"
+
+          echo "Updating Image ..."
+          sh "kubectl set image deployment/jade-${app} jade-${app}=${DOCKER_REGISTRY}jade-${app}:${IMAGE_TAG} --namespace ${NAMESPACE}"
+
+          script {
+            if (!(app == 'frontend' || app == 'graphql-gateway')) {
+              echo "Waiting 20 seconds ..."
+              sh "sleep 20"
+
+              echo "Updating GraphQL Gateway Deployment ..."
+              sh """
+                kubectl patch deployment/jade-graphql-gateway -p '{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"date\":\"${TIME}\"}}}}}' --namespace ${NAMESPACE}
+              """
+            }
+          }
+        }
+      }
+    }
+    stage('Run Tests') {
+  parallel{
+    stage('Performance Test') {
+      when{
+        environment name: 'app', value: 'frontend'
+      }
+
+      steps {
+        container('lighthouse') {
+          echo "Preparing for performance test ..."
+          sh "sleep 5"
+
+          echo "Running lighthouse ..."
+          sh """
+            lighthouse --chrome-flags="--headless --disable-gpu --no-sandbox" ${FRONTEND_URL} --output-path ./lighthouse-report.html
+          """
+        }
+      }
+
+      post {
+        always {
+          publishHTML (target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: '/home/jenkins/agent/workspace/jade/jade-manual/',
+            reportFiles: 'lighthouse-report.html',
+            reportName: "Jade Performance"
+          ])
+        }
+      }
+    }
+
+    stage('Accessibility Test') {
+      when{
+        environment name: 'app', value: 'frontend'
+      }
+
+      steps {
+        container('pa11y-ci') {
+          echo "Preparing for accessibility test ..."
+          sh "sleep 5"
+
+          echo "Running pa11y ..."
+          sh """
+            pa11y-ci -c ./pa11y/config.json
+          """
+        }
+      }
+    }
+  }
+    }
+  }
+}
+

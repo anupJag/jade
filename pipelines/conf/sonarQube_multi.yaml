@@ -1,0 +1,27 @@
+---
+sonar:
+  #sonarServer: "SONAR-main"
+  sonarServer: "Sonar-5.6"
+  sonarQubExecutable: "sonar-scanner"
+  preRun: "pwd"
+  javaOptions:
+    -Dsonar.projectKey: "pipeline-ui-catalog"
+    -Dsonar.projectName: "pipeline-ui-catalog"
+    -Dappname: "pipeline-ui-catalog"
+    -Dsonar.sources: "src"
+    -Dsonar.scm.enabled: "true"
+    -Dsonar.log.level: "INFO"
+    #-Dsonar.language: "java"
+    -Dsonar.findbugs.skip: true
+    -Dsonar.profile: 'Sonar\ way'
+    -Dsonar.findbugs.disabled: true
+    #-Dsonar.java.binaries: "target/classes"
+    #-Dsonar.exclusions: "\'${sonarExclusions}\'",
+    #-Dsonar.coverage.exclusions: "\'${coverageExclusions}\'",
+    #'-Dsonar.qualitygate: qualityGate,
+    #-Dsonar.junit.reportsPath: "."
+    #-Dsonar.cobertura.reportPath: "target/site/cobertura/coverage.xml"
+    #
+    # Dont need to define this as this would be set to env.BUILD_NUMBER.
+    #
+    #-Dsonar.projectVersion: "12"

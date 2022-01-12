@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Styled Component : Heading /> snapshot check for HeadingComponent's Styled components 1`] = `
+<DocumentFragment>
+  <h1
+    class="css-7imb5c"
+  >
+    h1
+  </h1>
+  <h2
+    class="css-zhbmh3"
+  >
+    h2
+  </h2>
+  <h3
+    class="css-v7zg6k"
+  >
+    h3
+  </h3>
+  <h4
+    class="css-mcy282"
+  >
+    h4
+  </h4>
+  <h5
+    class="css-1nhnene"
+  >
+    h5
+  </h5>
+  <h6
+    class="css-1nhnene"
+  >
+    h6
+  </h6>
+</DocumentFragment>
+`;

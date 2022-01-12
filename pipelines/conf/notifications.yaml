@@ -1,0 +1,8 @@
+---
+# subject: <override defaults as needed>
+# body:  <override defaults as needed>
+recipients: 'xxx@test.com'
+# Default *.png files are emailed and additional extensions can be specified below
+attachmentExtensions: '*.pdf'
+anonymousAccess: 'false'
+readOnlyCredentialId: 'jenkins-read-all'

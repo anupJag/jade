@@ -1,0 +1,1 @@
+export { StoreImage } from './StoreImage';

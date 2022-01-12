@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> should render correctly 1`] = `
+<DocumentFragment>
+  <nav
+    class="css-0"
+  >
+    <ul
+      class="css-1q0n0ua"
+    >
+      <li
+        class="css-1i54o6h"
+      >
+        <a
+          class="css-mzqm6m"
+          href="/categories"
+          title="Categories"
+        >
+          Categories 
+          <svg
+            aria-hidden="true"
+            class="css-1im46kq"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+      </li>
+      <li
+        class="css-1i54o6h"
+      >
+        <a
+          class="css-mzqm6m"
+          href="/offers"
+          title="Offers"
+        >
+           
+        </a>
+      </li>
+      <li
+        class="css-1i54o6h"
+      >
+        <a
+          class="css-mzqm6m"
+          href="/help/faq"
+          title="Help"
+        >
+          Help 
+        </a>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;

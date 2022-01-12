@@ -1,0 +1,17 @@
+FROM node:14.4.0-alpine
+
+RUN apk update && apk add yarn curl bash && rm -rf /var/cache/apk/*
+
+WORKDIR /usr/src/app
+
+COPY package.json yarn.lock ./
+
+RUN yarn global add @nrwl/cli
+
+RUN yarn --frozen-lockfile
+
+COPY . .
+
+RUN yarn build --configuration=production && yarn build:api --configuration=production
+
+RUN rm -rf ./node_modules ./apps

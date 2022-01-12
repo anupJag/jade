@@ -1,0 +1,124 @@
+{
+  "npmScope": "jade",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"]
+      }
+    }
+  },
+  "projects": {
+    "app": {
+      "tags": []
+    },
+    "graphql-user": {
+      "tags": []
+    },
+    "graphql-order": {
+      "tags": []
+    },
+    "graphql-products": {
+      "tags": []
+    },
+    "graphql-categories": {
+      "tags": []
+    },
+    "graphql-gateway": {
+      "tags": []
+    },
+    "graphql-content": {
+      "tags": []
+    },
+    "graphql-store-locator": {
+      "tags": []
+    },
+    "graphql-base": {
+      "tags": []
+    },
+    "content": {
+      "tags": []
+    },
+    "content-e2e": {
+      "tags": [],
+      "implicitDependencies": ["content"]
+    },
+    "browse-search": {
+      "tags": []
+    },
+    "browse-search-e2e": {
+      "tags": [],
+      "implicitDependencies": ["browse-search"]
+    },
+    "cart-checkout": {
+      "tags": []
+    },
+    "cart-checkout-e2e": {
+      "tags": [],
+      "implicitDependencies": ["cart-checkout"]
+    },
+    "accounts": {
+      "tags": []
+    },
+    "accounts-e2e": {
+      "tags": [],
+      "implicitDependencies": ["accounts"]
+    },
+    "store": {
+      "tags": []
+    },
+    "store-locator": {
+      "tags": []
+    },
+    "store-locator-e2e": {
+      "tags": [],
+      "implicitDependencies": ["store-locator"]
+    },
+    "ui-atoms": {
+      "tags": []
+    },
+    "ui-molecules": {
+      "tags": []
+    },
+    "utils": {
+      "tags": []
+    },
+    "style": {
+      "tags": []
+    },
+    "ui-themes": {
+      "tags": []
+    },
+    "ui-utils": {
+      "tags": []
+    },
+    "ui-organism": {
+      "tags": []
+    },
+    "ui-templates": {
+      "tags": []
+    },
+    "ui-abtests": {
+      "tags": []
+    },
+    "ui-graphql-client": {
+      "tags": []
+    },
+    "graphql-slot": {
+      "tags": []
+    },
+    "graphql-coupon": {
+      "tags": []
+    }
+  }
+}

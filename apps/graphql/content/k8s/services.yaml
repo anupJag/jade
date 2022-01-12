@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jade-graphql-content
+  namespace: grocery-dev
+  labels:
+    app: jade-graphql-content
+spec:
+  type: ClusterIP
+  selector:
+    app: jade-graphql-content
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      name: jade-graphql-content

@@ -1,0 +1,1346 @@
+{
+  "version": 1,
+  "projects": {
+    "app": {
+      "root": "",
+      "projectType": "application",
+      "architect": {
+        "serve": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "nx run graphql-products:serve"
+              },
+              {
+                "command": "nx run graphql-categories:serve"
+              },
+              {
+                "command": "nx run graphql-content:serve"
+              },
+              {
+                "command": "nx run graphql-order:serve"
+              },
+              {
+                "command": "nx run graphql-user:serve"
+              },
+              {
+                "command": "nx run graphql-store-locator:serve"
+              }
+            ],
+            "parallel": true
+          }
+        },
+        "serve-gateway": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "nx run graphql-gateway:serve"
+              }
+            ],
+            "parallel": true
+          }
+        }
+      }
+    },
+    "graphql-user": {
+      "root": "apps/graphql/user",
+      "sourceRoot": "apps/graphql/user/src",
+      "projectType": "application",
+      "prefix": "graphql-user",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/user",
+            "main": "apps/graphql/user/src/main.ts",
+            "tsConfig": "apps/graphql/user/tsconfig.app.json",
+            "assets": ["apps/graphql/user/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/user/src/environments/environment.ts",
+                  "with": "apps/graphql/user/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-user:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/user/tsconfig.app.json",
+              "apps/graphql/user/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/user/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/user/jest.config.js",
+            "tsConfig": "apps/graphql/user/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-order": {
+      "root": "apps/graphql/order",
+      "sourceRoot": "apps/graphql/order/src",
+      "projectType": "application",
+      "prefix": "graphql-order",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/order",
+            "main": "apps/graphql/order/src/main.ts",
+            "tsConfig": "apps/graphql/order/tsconfig.app.json",
+            "assets": ["apps/graphql/order/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/order/src/environments/environment.ts",
+                  "with": "apps/graphql/order/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-order:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/order/tsconfig.app.json",
+              "apps/graphql/order/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/order/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/order/jest.config.js",
+            "tsConfig": "apps/graphql/order/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-categories": {
+      "root": "apps/graphql/categories",
+      "sourceRoot": "apps/graphql/categories/src",
+      "projectType": "application",
+      "prefix": "graphql-categories",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/categories",
+            "main": "apps/graphql/categories/src/main.ts",
+            "tsConfig": "apps/graphql/categories/tsconfig.app.json",
+            "assets": ["apps/graphql/categories/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/categories/src/environments/environment.ts",
+                  "with": "apps/graphql/categories/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-categories:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/categories/tsconfig.app.json",
+              "apps/graphql/categories/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/categories/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/categories/jest.config.js",
+            "tsConfig": "apps/graphql/categories/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-products": {
+      "root": "apps/graphql/products",
+      "sourceRoot": "apps/graphql/products/src",
+      "projectType": "application",
+      "prefix": "graphql-products",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/products",
+            "main": "apps/graphql/products/src/main.ts",
+            "tsConfig": "apps/graphql/products/tsconfig.app.json",
+            "assets": ["apps/graphql/products/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/products/src/environments/environment.ts",
+                  "with": "apps/graphql/products/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-products:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/products/tsconfig.app.json",
+              "apps/graphql/products/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/products/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/products/jest.config.js",
+            "tsConfig": "apps/graphql/products/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-gateway": {
+      "root": "apps/graphql/gateway",
+      "sourceRoot": "apps/graphql/gateway/src",
+      "projectType": "application",
+      "prefix": "graphql-gateway",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/gateway",
+            "main": "apps/graphql/gateway/src/main.ts",
+            "tsConfig": "apps/graphql/gateway/tsconfig.app.json",
+            "assets": ["apps/graphql/gateway/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/gateway/src/environments/environment.ts",
+                  "with": "apps/graphql/gateway/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-gateway:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/gateway/tsconfig.app.json",
+              "apps/graphql/gateway/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/gateway/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/gateway/jest.config.js",
+            "tsConfig": "apps/graphql/gateway/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-content": {
+      "root": "apps/graphql/content",
+      "sourceRoot": "apps/graphql/content/src",
+      "projectType": "application",
+      "prefix": "graphql-content",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/content",
+            "main": "apps/graphql/content/src/main.ts",
+            "tsConfig": "apps/graphql/content/tsconfig.app.json",
+            "assets": ["apps/graphql/content/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/content/src/environments/environment.ts",
+                  "with": "apps/graphql/content/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-content:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/content/tsconfig.app.json",
+              "apps/graphql/content/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/content/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/content/jest.config.js",
+            "tsConfig": "apps/graphql/content/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-store-locator": {
+      "root": "apps/graphql/store-locator",
+      "sourceRoot": "apps/graphql/store-locator/src",
+      "projectType": "application",
+      "prefix": "graphql-store-locator",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/store-locator",
+            "main": "apps/graphql/store-locator/src/main.ts",
+            "tsConfig": "apps/graphql/store-locator/tsconfig.app.json",
+            "assets": ["apps/graphql/store-locator/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/store-locator/src/environments/environment.ts",
+                  "with": "apps/graphql/store-locator/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-store-locator:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/store-locator/tsconfig.app.json",
+              "apps/graphql/store-locator/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/store-locator/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/store-locator/jest.config.js",
+            "tsConfig": "apps/graphql/store-locator/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-base": {
+      "root": "libs/graphql/base",
+      "sourceRoot": "libs/graphql/base/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/graphql/base/tsconfig.lib.json",
+              "libs/graphql/base/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/graphql/base/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/graphql/base/jest.config.js",
+            "tsConfig": "libs/graphql/base/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "content": {
+      "root": "apps/content",
+      "sourceRoot": "apps/content",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/content",
+            "outputPath": "dist/apps/content"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "content:build",
+            "dev": true,
+            "port": 4200,
+            "proxyConfig": "apps/content/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "content:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "content:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/content/tsconfig.json", "apps/content/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/content/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/content/jest.config.js",
+            "tsConfig": "apps/content/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "content-e2e": {
+      "root": "apps/content-e2e",
+      "sourceRoot": "apps/content-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/content-e2e/cypress.json",
+            "tsConfig": "apps/content-e2e/tsconfig.e2e.json",
+            "devServerTarget": "content:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "content:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/content-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/content-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "browse-search": {
+      "root": "apps/browse-search",
+      "sourceRoot": "apps/browse-search",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/browse-search",
+            "outputPath": "dist/apps/browse-search"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "browse-search:build",
+            "dev": true,
+            "port": 4201,
+            "proxyConfig": "apps/browse-search/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "browse-search:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "browse-search:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/browse-search/tsconfig.json",
+              "apps/browse-search/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/browse-search/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/browse-search/jest.config.js",
+            "tsConfig": "apps/browse-search/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "browse-search-e2e": {
+      "root": "apps/browse-search-e2e",
+      "sourceRoot": "apps/browse-search-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/browse-search-e2e/cypress.json",
+            "tsConfig": "apps/browse-search-e2e/tsconfig.e2e.json",
+            "devServerTarget": "browse-search:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "browse-search:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/browse-search-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/browse-search-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "cart-checkout": {
+      "root": "apps/cart-checkout",
+      "sourceRoot": "apps/cart-checkout",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/cart-checkout",
+            "outputPath": "dist/apps/cart-checkout"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "cart-checkout:build",
+            "dev": true,
+            "port": 4202,
+            "proxyConfig": "apps/cart-checkout/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "cart-checkout:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "cart-checkout:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/cart-checkout/tsconfig.json",
+              "apps/cart-checkout/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/cart-checkout/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/cart-checkout/jest.config.js",
+            "tsConfig": "apps/cart-checkout/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "cart-checkout-e2e": {
+      "root": "apps/cart-checkout-e2e",
+      "sourceRoot": "apps/cart-checkout-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cart-checkout-e2e/cypress.json",
+            "tsConfig": "apps/cart-checkout-e2e/tsconfig.e2e.json",
+            "devServerTarget": "cart-checkout:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cart-checkout:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/cart-checkout-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/cart-checkout-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "accounts": {
+      "root": "apps/accounts",
+      "sourceRoot": "apps/accounts",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/accounts",
+            "outputPath": "dist/apps/accounts"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "accounts:build",
+            "dev": true,
+            "port": 4203,
+            "proxyConfig": "apps/accounts/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "accounts:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "accounts:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/accounts/tsconfig.json", "apps/accounts/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/accounts/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/accounts/jest.config.js",
+            "tsConfig": "apps/accounts/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "accounts-e2e": {
+      "root": "apps/accounts-e2e",
+      "sourceRoot": "apps/accounts-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/accounts-e2e/cypress.json",
+            "tsConfig": "apps/accounts-e2e/tsconfig.e2e.json",
+            "devServerTarget": "accounts:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "accounts:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/accounts-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/accounts-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "store-locator": {
+      "root": "apps/store-locator",
+      "sourceRoot": "apps/store-locator",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/store-locator",
+            "outputPath": "dist/apps/store-locator"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "store-locator:build",
+            "dev": true,
+            "port": 4204,
+            "proxyConfig": "apps/store-locator/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "store-locator:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "store-locator:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/store-locator/tsconfig.json",
+              "apps/store-locator/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/store-locator/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/store-locator/jest.config.js",
+            "tsConfig": "apps/store-locator/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "store-locator-e2e": {
+      "root": "apps/store-locator-e2e",
+      "sourceRoot": "apps/store-locator-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/store-locator-e2e/cypress.json",
+            "tsConfig": "apps/store-locator-e2e/tsconfig.e2e.json",
+            "devServerTarget": "store-locator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "store-locator:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/store-locator-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/store-locator-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "ui-atoms": {
+      "root": "libs/ui/atoms",
+      "sourceRoot": "libs/ui/atoms/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/ui/atoms/tsconfig.lib.json", "libs/ui/atoms/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui/atoms/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/atoms/jest.config.js",
+            "tsConfig": "libs/ui/atoms/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-molecules": {
+      "root": "libs/ui/molecules",
+      "sourceRoot": "libs/ui/molecules/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/ui/molecules/tsconfig.lib.json",
+              "libs/ui/molecules/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/molecules/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/molecules/jest.config.js",
+            "tsConfig": "libs/ui/molecules/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-themes": {
+      "root": "libs/ui/themes",
+      "sourceRoot": "libs/ui/themes/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/ui/themes/tsconfig.lib.json", "libs/ui/themes/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui/themes/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/themes/jest.config.js",
+            "tsConfig": "libs/ui/themes/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-utils": {
+      "root": "libs/ui/utils",
+      "sourceRoot": "libs/ui/utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/ui/utils/tsconfig.lib.json", "libs/ui/utils/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui/utils/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/utils/jest.config.js",
+            "tsConfig": "libs/ui/utils/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "utils": {
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/utils/tsconfig.lib.json", "libs/utils/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/utils/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "tsConfig": "libs/utils/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "store": {
+      "root": "libs/store",
+      "sourceRoot": "libs/store/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/store/tsconfig.lib.json", "libs/store/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/store/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/store/jest.config.js",
+            "tsConfig": "libs/store/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "style": {
+      "root": "libs/style",
+      "sourceRoot": "libs/style/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/style/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/style/**/*"]
+          }
+        }
+      }
+    },
+    "ui-organism": {
+      "root": "libs/ui/organism",
+      "sourceRoot": "libs/ui/organism/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/ui/organism/tsconfig.lib.json",
+              "libs/ui/organism/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/organism/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/organism/jest.config.js",
+            "tsConfig": "libs/ui/organism/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-templates": {
+      "root": "libs/ui/templates",
+      "sourceRoot": "libs/ui/templates/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/ui/templates/tsconfig.lib.json",
+              "libs/ui/templates/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/templates/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/templates/jest.config.js",
+            "tsConfig": "libs/ui/templates/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-abtests": {
+      "root": "libs/ui/abtests",
+      "sourceRoot": "libs/ui/abtests/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/ui/abtests/tsconfig.lib.json", "libs/ui/abtests/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/ui/abtests/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/abtests/jest.config.js",
+            "tsConfig": "libs/ui/abtests/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/ui/abtests",
+            "tsConfig": "libs/ui/abtests/tsconfig.lib.json",
+            "packageJson": "libs/ui/abtests/package.json",
+            "main": "libs/ui/abtests/src/index.ts",
+            "assets": ["libs/ui/abtests/*.md"]
+          }
+        }
+      }
+    },
+    "ui-graphql-client": {
+      "root": "libs/ui/graphql-client",
+      "sourceRoot": "libs/ui/graphql-client/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/ui/graphql-client/tsconfig.lib.json",
+              "libs/ui/graphql-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/graphql-client/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/graphql-client/jest.config.js",
+            "tsConfig": "libs/ui/graphql-client/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-slot": {
+      "root": "apps/graphql/slot",
+      "sourceRoot": "apps/graphql/slot/src",
+      "projectType": "application",
+      "prefix": "graphql-slot",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/slot",
+            "main": "apps/graphql/slot/src/main.ts",
+            "tsConfig": "apps/graphql/slot/tsconfig.app.json",
+            "assets": ["apps/graphql/slot/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/slot/src/environments/environment.ts",
+                  "with": "apps/graphql/slot/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-slot:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/slot/tsconfig.app.json",
+              "apps/graphql/slot/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/slot/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/slot/jest.config.js",
+            "tsConfig": "apps/graphql/slot/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-coupon": {
+      "root": "apps/graphql/coupon",
+      "sourceRoot": "apps/graphql/coupon/src",
+      "projectType": "application",
+      "prefix": "graphql-coupon",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/graphql/coupon",
+            "main": "apps/graphql/coupon/src/main.ts",
+            "tsConfig": "apps/graphql/coupon/tsconfig.app.json",
+            "assets": ["apps/graphql/coupon/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/graphql/coupon/src/environments/environment.ts",
+                  "with": "apps/graphql/coupon/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "graphql-coupon:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/graphql/coupon/tsconfig.app.json",
+              "apps/graphql/coupon/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/graphql/coupon/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/graphql/coupon/jest.config.js",
+            "tsConfig": "apps/graphql/coupon/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/node"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint",
+        "babel": true
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "app"
+}

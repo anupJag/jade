@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jade-graphql-order
+  namespace: grocery-dev
+  labels:
+    app: jade-graphql-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jade-graphql-order
+  template:
+    metadata:
+      labels:
+        app: jade-graphql-order
+    spec:
+      containers:
+        - name: jade-graphql-order
+          image: harbor.instg.pscloudhub.com/iris/jade-graphql-order:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: LOG_LEVEL
+              value: debug
+            - name: MONGO_URL
+              value: mongodb+srv://xtstarterkit:XTstarterkit@2020@jade-pjdkm.mongodb.net
+            - name: DB_NAME
+              value: grocery-commerce-db
+            - name: APP_NAME
+              value: JADE Order GraphQL

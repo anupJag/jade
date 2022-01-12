@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jade-graphql-order
+  namespace: grocery-dev
+  labels:
+    app: jade-graphql-order
+spec:
+  type: ClusterIP
+  selector:
+    app: jade-graphql-order
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      name: jade-graphql-order

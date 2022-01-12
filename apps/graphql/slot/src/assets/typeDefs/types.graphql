@@ -1,0 +1,23 @@
+type SlotAvailability {
+  date: String!
+  slots: [Slot]!
+}
+
+type Slot {
+  name: String!
+  remaining: Int!
+}
+
+type SlotInformation {
+  id: ID!
+  key: String!
+  value: String!
+}
+
+type BookedSlot {
+  id: ID!
+  name: String!
+  date: String!
+  zipcode: Int!
+  orderId: ID
+}

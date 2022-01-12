@@ -1,0 +1,12 @@
+type Query {
+  user(id: ID!): User
+  userByEmail(email: String!): User
+  verifyToken: User
+}
+
+type Mutation {
+  registerUser(details: UserRegistration!): User!
+  login(loginDetail: LoginDetail!): User!
+  ssoLogin(ssoDetail: SSODetail!): User!
+  logout(id: ID): User
+}

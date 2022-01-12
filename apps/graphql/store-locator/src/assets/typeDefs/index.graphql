@@ -1,0 +1,9 @@
+type Query {
+  fetchStore(storeId: ID!): Store!
+  fetchStores: [Store]!
+  fetchStoresByPostalcode(postalCode: String): [Store]!
+}
+
+type Mutation {
+  addStore(details: AddStore!): Store!
+}

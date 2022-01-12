@@ -1,0 +1,8 @@
+---
+publish:
+  vaultrolename: ""
+  secretpath: "/secret/jenkins/npmpublish"
+  registry: "https://nexus.in.pscloudhub.com/repository/npm-ps/"
+  versioncheck: "true"
+  npmargs: "npm install"
+  npmpublishargs: "npm publish "

@@ -1,0 +1,10 @@
+type Query {
+  fetchCategories: [Category]!
+  fetchRootCategories: [Category]!
+  fetchCategoryById(id: ID!): Category
+  fetchAllChildrenOfCategoryId(id: ID!): [Category]
+}
+
+type Mutation {
+  addCategory(details: AddCategory!): Category!
+}

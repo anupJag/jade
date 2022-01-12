@@ -1,0 +1,11 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "Filter",
+        "possibleTypes": [{ "name": "RangeFilter" }, { "name": "ValueFilter" }]
+      }
+    ]
+  }
+}

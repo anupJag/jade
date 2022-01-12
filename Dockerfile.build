@@ -1,0 +1,12 @@
+FROM node:14.4.0-alpine
+
+ARG COMMAND_TYPE
+
+WORKDIR /nx
+COPY package.json yarn.lock ./
+RUN yarn global add @nrwl/cli
+RUN yarn install --frozen-lockfile
+
+ADD . ./nx/
+
+RUN yarn ${COMMAND_TYPE}

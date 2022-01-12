@@ -1,0 +1,9 @@
+{
+  "/browse": {
+    "target": "http://localhost:4201",
+    "pathRewrite": {
+      "^/browse-assets/_next": "/_next"
+    },
+    "secure": false
+  }
+}

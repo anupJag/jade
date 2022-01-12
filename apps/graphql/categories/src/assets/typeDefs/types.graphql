@@ -1,0 +1,9 @@
+type Category @key(fields: "id") {
+  id: ID!
+  name: String!
+  categoryIdentifier: String!
+  isRootCategory: Boolean!
+  parentId: ID
+  image: String
+  children: Category
+}

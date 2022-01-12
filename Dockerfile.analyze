@@ -1,0 +1,11 @@
+FROM node:14.4.0-alpine
+
+WORKDIR /nx
+COPY package.json yarn.lock ./
+RUN yarn global add @nrwl/cli
+RUN yarn install --frozen-lockfile
+
+ADD . .
+
+RUN yarn test-all
+RUN yarn affected:lint

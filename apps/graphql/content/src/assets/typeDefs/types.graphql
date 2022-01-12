@@ -1,0 +1,56 @@
+type Link {
+  linkName: String
+  linkText: String
+  linkUrl: String
+  newTab: Boolean
+}
+
+type Image {
+  imageName: String
+  imageFile: String
+  imageHeight: String
+  imageWidth: String
+  imageCaption: String
+  imageLink: String
+}
+
+type Article {
+  articleName: String!
+  title: String
+  content: String
+  image: [Image]
+  link: [Link]
+}
+
+type PageMetadata {
+  pageRoute: String!
+  pageTitle: String
+  pageDescription: String
+  pageKeywords: String
+  shouldIndex: Boolean
+}
+
+type Label {
+  labelName: String
+  labelValue: String!
+}
+
+type Config {
+  configName: String!
+  textConfig: String
+  configOption: Boolean
+}
+
+type ContentSlot {
+  contentId: String
+  moduleName: String
+}
+
+type ContentSlots {
+  slots: [ContentSlot]
+}
+
+type StaticLayout {
+  layout: ContentSlots
+  slug: String
+}

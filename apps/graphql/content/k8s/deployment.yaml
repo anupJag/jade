@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jade-graphql-content
+  namespace: grocery-dev
+  labels:
+    app: jade-graphql-content
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jade-graphql-content
+  template:
+    metadata:
+      labels:
+        app: jade-graphql-content
+    spec:
+      containers:
+        - name: jade-graphql-content
+          image: harbor.instg.pscloudhub.com/iris/jade-graphql-content:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: LOG_LEVEL
+              value: debug
+            - name: CONTENTFUL_SPACE_ID
+              value: r1nemv2qs9l3
+            - name: CONTENTFUL_DELIVERY_TOKEN
+              value: mkaIms9FnotIJgauSxLA-aGpr64Cu0Fz0e7lZRvleY4
+            - name: CONTENTFUL_PREVIEW_TOKEN
+              value: sj3gtpb27mNnhGF34uquYpWavoLknu3MoC5IhqfElPw
+            - name: CONTENTFUL_DELIVERY_API_HOST
+              value: cdn.contentful.com
+            - name: CONTENTFUL_PREVIEW_API_HOST
+              value: preview.contentful.com
+            - name: CONTENTFUL_CLIENT_TYPE
+              value: delivery

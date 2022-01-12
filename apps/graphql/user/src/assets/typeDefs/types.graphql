@@ -1,0 +1,24 @@
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String!
+  phoneNumber: String
+  profilePicture: String
+  provider: [String]
+  googleId: String
+  facebookId: String
+  role: String
+  access: Access
+  refresh: Refresh
+}
+
+type Access {
+  token: String
+  expires: String
+}
+
+type Refresh {
+  token: String
+  expires: String
+}

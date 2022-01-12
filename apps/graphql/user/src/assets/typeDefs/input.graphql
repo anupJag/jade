@@ -1,0 +1,31 @@
+input UserRegistration {
+  firstName: String!
+  lastName: String
+  email: String!
+  password: String
+  phoneNumber: String
+  profilePicture: String
+  provider: String
+  googleId: String
+  facebookId: String
+  role: String
+}
+
+input LoginDetail {
+  email: String!
+  password: String!
+}
+
+input SSODetail {
+  email: String!
+  facebookId: String
+  googleId: String
+  firstName: String
+  lastName: String
+  profilePicture: String
+  provider: [String]
+}
+
+input userByEmail {
+  email: String!
+}

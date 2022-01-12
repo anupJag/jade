@@ -1,0 +1,345 @@
+image: docker:latest
+
+before_script:
+  - case "$CI_COMMIT_REF_NAME" in
+    "develop")
+    export BUILDTYPE="develop"
+    ;;
+    "master")
+    export BUILDTYPE="master"
+    ;;
+    *)
+    export BUILDTYPE="feature"
+    ;;
+    esac
+  - case "$CI_COMMIT_TAG" in
+    release*)
+    export BUILDTYPE="release"
+    ;;
+    esac
+
+cache:
+  paths:
+    - .yarn
+    - node_modules/
+
+stages:
+  - analyze
+  - build
+  - build:prepare
+  - build:push
+  - deploy
+
+.build_template: &build_definition
+  stage: build:push
+  tags:
+    - jade-xt-pipeline
+  when: on_success
+  only:
+    - tags
+    - master
+
+# ==================DEV STAGE========================
+
+Lint_Test:
+  stage: analyze
+  tags:
+    - jade-xt-pipeline
+  script:
+    - docker build -f "Dockerfile.analyze" -t analyze:lint-test-$CI_COMMIT_SHORT_SHA .
+    - docker rmi analyze:lint-test-$CI_COMMIT_SHORT_SHA
+  allow_failure: true
+  except:
+    - master
+    - tags
+
+APIs:
+  stage: build
+  tags:
+    - jade-xt-pipeline
+  script:
+    - docker build -f "Dockerfile.build" --build-arg COMMAND_TYPE=build:api -t build:api-build-$CI_COMMIT_SHORT_SHA .
+    - docker rmi build:api-build-$CI_COMMIT_SHORT_SHA
+  except:
+    - master
+    - tags
+
+APPs:
+  stage: build
+  tags:
+    - jade-xt-pipeline
+  script:
+    - docker build -f "Dockerfile.build" --build-arg COMMAND_TYPE=build -t build:app-build-$CI_COMMIT_SHORT_SHA .
+    - docker rmi build:app-build-$CI_COMMIT_SHORT_SHA
+  except:
+    - master
+    - tags
+
+# ==================PREPARE DEPLOYMENT STAGE========================
+
+Prepare:
+  stage: build:prepare
+  tags:
+    - jade-xt-pipeline
+  when: on_success
+  variables:
+    NEXT_PUBLIC_GRAPHQL_API_URL: 'http://localhost:3001/graphql' #TODO: to be changed.
+    CAPTCHA_SITE_KEY: '6LfZttkZAAAAAGT8kgnPNmZQ7VrrZyvb9B7IJuf2'
+    FACEBOOK_APP_ID: '2798307007080488'
+    GOOGLE_CLIENT_ID: '421506275526-dsg80ohb5tdb0e0im9pikbk0vfr2iigb.apps.googleusercontent.com'
+    NEXT_PUBLIC_CONTENTFUL_SPACE_ID: 'r1nemv2qs9l3'
+    NEXT_PUBLIC_CONTENTFUL_URL: 'https://graphql.contentful.com/content/v1/spaces/'
+    NEXT_PUBLIC_CONTENTFUL_TOKEN: 'mkaIms9FnotIJgauSxLA-aGpr64Cu0Fz0e7lZRvleY4'
+    NEXT_PUBLIC_APP_NAME: 'JADE App'
+  only:
+    - tags
+    - master
+  script:
+    - docker build -f "Dockerfile.base"  --no-cache=true -t $PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA
+
+# ==================BUILD DEPLOYMENT STAGE========================
+APP_Content:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.app" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=content --build-arg APP_PATH=content  --no-cache=true -t $PROJECT_REPO:content-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:content-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:content-$CI_COMMIT_SHORT_SHA
+
+APP_Browse_Search:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.app" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=browse-search --build-arg APP_PATH=browse-search  --no-cache=true -t $PROJECT_REPO:browse-search-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:browse-search-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:browse-search-$CI_COMMIT_SHORT_SHA
+
+APP_Cart_Checkout:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.app" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=cart-checkout --build-arg APP_PATH=cart-checkout  --no-cache=true -t $PROJECT_REPO:cart-checkout-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:cart-checkout-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:cart-checkout-$CI_COMMIT_SHORT_SHA
+
+APP_Accounts:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.app" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=accounts --build-arg APP_PATH=accounts  --no-cache=true -t $PROJECT_REPO:accounts-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:accounts-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:accounts-$CI_COMMIT_SHORT_SHA
+
+#----->API Build here
+
+API_Graphql_Gateway:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=gateway --build-arg APP_PATH=gateway  --no-cache=true -t $PROJECT_REPO:graphql-gateway-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:graphql-gateway-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:graphql-gateway-$CI_COMMIT_SHORT_SHA
+
+API_Categories:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=categories --build-arg APP_PATH=categories  --no-cache=true -t $PROJECT_REPO:categories-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:categories-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:categories-api-$CI_COMMIT_SHORT_SHA
+
+API_Content:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=content --build-arg APP_PATH=content  --no-cache=true -t $PROJECT_REPO:content-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:content-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:content-api-$CI_COMMIT_SHORT_SHA
+
+API_Order:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=order --build-arg APP_PATH=order  --no-cache=true -t $PROJECT_REPO:order-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:order-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:order-api-$CI_COMMIT_SHORT_SHA
+
+API_Products:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=products --build-arg APP_PATH=products  --no-cache=true -t $PROJECT_REPO:products-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:products-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:products-api-$CI_COMMIT_SHORT_SHA
+
+API_Store_Locator:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=store-locator --build-arg APP_PATH=store-locator  --no-cache=true -t $PROJECT_REPO:store-locator-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:store-locator-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:store-locator-api-$CI_COMMIT_SHORT_SHA
+
+API_User:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=user --build-arg APP_PATH=user  --no-cache=true -t $PROJECT_REPO:user-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:user-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:user-api-$CI_COMMIT_SHORT_SHA
+
+API_Slot:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=slot --build-arg APP_PATH=slot  --no-cache=true -t $PROJECT_REPO:slot-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:slot-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:slot-api-$CI_COMMIT_SHORT_SHA
+
+API_Coupon:
+  <<: *build_definition
+  script:
+    - docker build -f "Dockerfile.api" --build-arg BASE_IMG=$PROJECT_REPO:base-$CI_COMMIT_SHORT_SHA --build-arg APP_NAME=coupon --build-arg APP_PATH=coupon  --no-cache=true -t $PROJECT_REPO:coupon-api-$CI_COMMIT_SHORT_SHA .
+    - docker push $PROJECT_REPO:coupon-api-$CI_COMMIT_SHORT_SHA
+    - docker rmi $PROJECT_REPO:coupon-api-$CI_COMMIT_SHORT_SHA
+
+# ==================DEPLOYMENT STAGE========================
+
+_Content:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:content-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/content/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_Browse_Search:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:browse-search-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/browse-search/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_Cart_Checkout:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:cart-checkout-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/cart-checkout/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_Accounts:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:accounts-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/accounts/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+#----->API Deployment
+
+_API_Graphql_Gateway:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:graphql-gateway-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/gateway/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Categories:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:categories-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/categories/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Content:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:content-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/content/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Order:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:order-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/order/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Products:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:products-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/products/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Store_Locator:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:store-locator-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/store-locator/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_User:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:user-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/user/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Slot:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:slot-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/slot/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+
+_API_Coupon:
+  stage: deploy
+  tags:
+    - jade-xt-pipeline
+  script:
+    - export DOCKER_IMAGE=$PROJECT_REPO:coupon-api-$CI_COMMIT_SHORT_SHA
+    - envsubst < apps/graphql/coupon/k8s/deployment.yaml | kubectl apply -f -
+  only:
+    - tags
+    - master
+# ==================CLEANUP STAGE========================
+
+# after_script:
+#   - docker image prune -f

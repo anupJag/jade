@@ -1,0 +1,97 @@
+{
+    "filters": [{
+      "displayName": "Price",
+      "key": "price",
+      "range": [{
+        "start": "*",
+        "end": "19.99"
+      },{
+        "start": "20",
+        "end": "99.99"
+      }, {
+        "start": "100",
+        "end": "*"
+      }]
+    }, {
+      "displayName": "Ratings",
+      "key": "rating",
+      "range": [{
+        "value": "2"
+      }, {
+        "value": "4"
+      }, {
+        "value": "5"
+      }]
+    }],
+    "products": [
+      {
+        "name": "Remington Keratin Protect Straightener",
+        "imageUrl": "/images/products/straightener.jpg",
+        "productUrl": "/p/184060007",
+        "imageAlt": "Fresho Apple - Royal Gala, Regular",
+        "description": "Shiny, healthy-looking hair is on-trend, but the combination of high heat and dry hair, which often occurs when you straighten your hair, can cause splitting, damage, weaken your hair. Luckily, Remington have come up with a solution to help end excessive heat and lack of protection.",
+        "price": "80",
+        "promoEndDate": null,
+        "id": "184060007",
+        "pricePer": "0.59",
+        "promoDescription": null,
+        "substitutionValue": null,
+        "unitOfMeasure": "Lb",
+        "quantity": null,
+        "rating": 2,
+        "reviewCount": 100
+      },
+      {
+        "name": "Manhattan T2-R 500Gb Freeview High Definition Recorder",
+        "imageUrl": "/images/products/recorder.jpg",
+        "productUrl": "/p/960038585",
+        "imageAlt": "Fresho Capsicum - Green, 500 g",
+        "description": "Receives over 60 channels with up to 15 in HD and 25 radio stations ause, record and rewind live TV 8-day programme guide",
+        "price": "129",
+        "promoEndDate": null,
+        "id": "960038585",
+        "pricePer": "0.24",
+        "promoDescription": null,
+        "substitutionValue": null,
+        "unitOfMeasure": "Oz",
+        "quantity": null,
+        "rating": 5,
+        "reviewCount": 50
+      },
+      {
+        "name": "Juice 3 Powerbank Red",
+        "imageUrl": "/images/products/powerbank.jpg",
+        "productUrl": "/p/960106027",
+        "imageAlt": "",
+        "description": "Input 1: Micro USB DC5V/2A. Input 2: Type C DC5V/2A. Output 1: USB A DC 5V/2. 1A (max). Output 2: Type C DC 5V/2. 4A (max). Total Output: DC 5V/2. 4A (max). CE certified Portable charger for mobile charges an average smartphone from 0-50% in only fifty minutes and 3 charges of an average smartphone. 2. 4 Amp max output to charge mobiles. 10000mAh/37Wh portable power bank. Charge 2 devices at once USB-A and USB Type-C ports. Digital display to check remaining energy levels.",
+        "price": "20",
+        "promoEndDate": null,
+        "id": "960106027",
+        "pricePer": "0.13",
+        "promoDescription": null,
+        "substitutionValue": null,
+        "unitOfMeasure": "Fz",
+        "quantity": null,
+        "rating": 4,
+        "reviewCount": 100
+      },
+      {
+        "name": "Case it iPhone 7/8 Black Folio Screen Protector",
+        "imageUrl": "/images/products/protector.jpg",
+        "productUrl": "/p/184570092",
+        "imageAlt": "",
+        "description": "Made from a strong, hard-wearing material, the case provides excellent protection for your phone and the soft suede-effect inner lining keeps your device scratch-free. The included screen protector will make sure your device is protected all round. ",
+        "price": "14",
+        "promoEndDate": null,
+        "id": "184570092",
+        "pricePer": "1.99",
+        "promoDescription": null,
+        "substitutionValue": null,
+        "unitOfMeasure": "Lb",
+        "quantity": null,
+        "rating": 5,
+        "reviewCount": 1
+      }
+    ]
+  }
+  

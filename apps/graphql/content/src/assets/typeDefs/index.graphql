@@ -1,0 +1,9 @@
+type Query {
+  link(id: ID!): Link
+  pageMetadata(route: String!): PageMetadata
+  article(name: String!): Article
+  image(name: String!): Image
+  label(name: String!): [Label]
+  config(name: String!): [Config]
+  pageLayout(name: String!): [StaticLayout]
+}

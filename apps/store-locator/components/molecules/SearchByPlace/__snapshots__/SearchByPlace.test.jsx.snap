@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchByPlace should render search by place correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1oraz31"
+  >
+    <svg
+      aria-hidden="true"
+      class="css-1im46kq"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M23.384,21.619,16.855,15.09a9.284,9.284,0,1,0-1.768,1.768l6.529,6.529a1.266,1.266,0,0,0,1.768,0A1.251,1.251,0,0,0,23.384,21.619ZM2.75,9.5a6.75,6.75,0,1,1,6.75,6.75A6.758,6.758,0,0,1,2.75,9.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+  <div
+    class="css-1oraz31"
+  >
+    <h5
+      class="css-1nhnene"
+    >
+      Search by PostalCode
+    </h5>
+  </div>
+  <div
+    class="css-1l4w6pd"
+  >
+    <div
+      class="css-k008qs"
+    >
+      <div
+        class="css-1r6jzkd"
+      >
+        <input
+          class="css-1ga4kqw"
+          placeholder="Enter Postalcode"
+        />
+      </div>
+    </div>
+    <button
+      class="css-1fr67ji"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="css-1im46kq"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </div>
+</DocumentFragment>
+`;

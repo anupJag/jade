@@ -1,0 +1,22 @@
+type CartItem {
+  id: ID!
+  addedBy: String!
+  productId: String!
+  quantity: Int!
+}
+
+type CartItemWithProduct {
+  id: ID!
+  productId: ID!
+  addedBy: String!
+  quantity: Int!
+  product: Product
+  itemTotal: Float
+}
+
+type CartDetails {
+  bag: [CartItemWithProduct]!
+  bagTotal: Float
+  discountedPrice: Float
+  grandTotal: Float
+}

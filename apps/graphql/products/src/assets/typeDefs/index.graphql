@@ -1,0 +1,11 @@
+type Query {
+  fetchProducts: [Product]!
+  fetchProduct(id: ID!): Product
+  fetchProductBySku(skuId: String!): Product
+  searchProducts(searchText: String!): [Product!]!
+  getFacets(details: PLPQueriesParams!): ProductListType
+}
+
+type Mutation {
+  addProduct(details: AddProduct!): Product!
+}

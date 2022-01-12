@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoreTiming should render store timing correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="css-f051v4"
+  >
+    <div
+      class="css-k0f1kz"
+    />
+    <div
+      class="css-0"
+    >
+      <h4
+        class="css-mcy282"
+      >
+        <p
+          class="css-1t24val"
+        >
+            
+        </p>
+      </h4>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Mon
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Tue
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Wed
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Thu
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Fri
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Sat
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+      <div
+        class="css-2o23i1"
+      >
+        <div
+          class="css-gg4vpm"
+        >
+          <span>
+            Sun
+          </span>
+          <span>
+            07:00 - 23:00
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1n1nucz"
+    >
+      Opening hours vary for some facilities.
+    </div>
+  </div>
+</DocumentFragment>
+`;

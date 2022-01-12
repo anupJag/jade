@@ -1,0 +1,117 @@
+[
+  {
+    "id": 1001,
+    "name": "Charing Cross Express",
+    "address": "1-4 Charing Cross, London",
+    "country": "UK",
+    "postal_code": "SW1A 2DR",
+    "contact": "0345 026 9353",
+    "location": {
+      "latitude": 51.507404,
+      "longitude": -0.12724
+    },
+    "open_hours": {
+      "mon": "7am - 11pm",
+      "tue": "7am - 11pm",
+      "wed": "7am - 11pm",
+      "thu": "7am - 11pm",
+      "fri": "7am - 11pm",
+      "sat": "7am - 11pm",
+      "sun": "7am - 11pm"
+    },
+    "openHourInfo": "Opening hours vary for some facilities. View store details for more information.",
+    "isOpen": true
+  },
+  {
+    "id": 1002,
+    "name": "Covent Garden Metro",
+    "address": "22-25 Bedford St, Covent Garden, London",
+    "country": "UK",
+    "postal_code": "WC2E 9EQ",
+    "contact": "0345 026 9353",
+    "location": {
+      "latitude": 51.507404,
+      "longitude": -0.12724
+    },
+    "open_hours": {
+      "mon": "7am - 11pm",
+      "tue": "7am - 11pm",
+      "wed": "7am - 11pm",
+      "thu": "7am - 11pm",
+      "fri": "7am - 11pm",
+      "sat": "7am - 11pm",
+      "sun": "7am - 11pm"
+    },
+    "openHourInfo": "Opening hours vary for some facilities. View store details for more information.",
+    "isOpen": false
+  },
+  {
+    "id": 1003,
+    "name": "Warrington Man Rd Express",
+    "address": "Manchester Rd, Warrington",
+    "country": "UK",
+    "postal_code": "WA1 3NJ",
+    "contact": "0345 026 9353",
+    "location": {
+      "latitude": 53.397055,
+      "longitude": -2.565406
+    },
+    "open_hours": {
+      "mon": "7am - 11pm",
+      "tue": "7am - 11pm",
+      "wed": "7am - 11pm",
+      "thu": "7am - 11pm",
+      "fri": "7am - 11pm",
+      "sat": "7am - 11pm",
+      "sun": "7am - 11pm"
+    },
+    "openHourInfo": "Opening hours vary for some facilities. View store details for more information.",
+    "isOpen": true
+  },
+  {
+    "id": 1004,
+    "name": "Warrington Orford Green Esso Express",
+    "address": "Orford Green, Warrington, Warrington",
+    "country": "UK",
+    "postal_code": "WA2 8PB",
+    "contact": "0345 026 9353",
+    "location": {
+      "latitude": 53.406646,
+      "longitude": -2.57579
+    },
+    "open_hours": {
+      "mon": "7am - 11pm",
+      "tue": "7am - 11pm",
+      "wed": "7am - 11pm",
+      "thu": "7am - 11pm",
+      "fri": "7am - 11pm",
+      "sat": "7am - 11pm",
+      "sun": "7am - 11pm"
+    },
+    "openHourInfo": "Opening hours vary for some facilities. View store details for more information.",
+    "isOpen": true
+  },
+  {
+    "id": 1005,
+    "name": "Dam Lane Express",
+    "address": "52-54 Dam Lane, Warrington",
+    "country": "UK",
+    "postal_code": "WA1 4EP",
+    "contact": "0345 026 9353",
+    "location": {
+      "latitude": 53.401793,
+      "longitude": -2.531151
+    },
+    "open_hours": {
+      "mon": "7am - 11pm",
+      "tue": "7am - 11pm",
+      "wed": "7am - 11pm",
+      "thu": "7am - 11pm",
+      "fri": "7am - 11pm",
+      "sat": "7am - 11pm",
+      "sun": "7am - 11pm"
+    },
+    "openHourInfo": "Opening hours vary for some facilities. View store details for more information.",
+    "isOpen": false
+  }
+]

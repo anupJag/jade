@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jade-accounts
+  labels:
+    app: jade-accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jade-accounts
+  template:
+    metadata:
+      labels:
+        app: jade-accounts
+    spec:
+      containers:
+        - name: jade-accounts
+          image: gauravmall/jade:accounts-8d152238
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 4203
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4203
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4203
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: http://jade-graphql-gateway.grocery-dev:80/graphql/
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"

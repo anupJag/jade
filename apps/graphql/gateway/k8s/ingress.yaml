@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jade-graphql-gateway
+  namespace: grocery-dev
+  labels:
+    app: jade-graphql-gateway
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-production"
+    certmanager.k8s.io/acme-challenge-type: "dns01"
+    certmanager.k8s.io/acme-dns01-provider: "gcp-clouddns-provider"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*.in.pscloudhub.com"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300s"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300s"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300s"
+    # nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  tls:
+    - hosts:
+        - graphql.instg.pscloudhub.com
+      secretName: jade-graphql-gateway-tls
+  rules:
+    - host: graphql.instg.pscloudhub.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: jade-graphql-gateway
+              servicePort: 80

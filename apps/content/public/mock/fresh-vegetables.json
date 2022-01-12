@@ -1,0 +1,115 @@
+{
+  "filters": [{
+    "displayName": "Price",
+    "key": "price",
+    "range": [{
+      "start": "*",
+      "end": "0.99"
+    },{
+      "start": "1",
+      "end": "4.99"
+    }, {
+      "start": "5",
+      "end": "*"
+    }]
+  }, {
+    "displayName": "Ratings",
+    "key": "rating",
+    "range": [{
+      "value": "2"
+    }, {
+      "value": "3"
+    }, {
+      "value": "4"
+    }, {
+      "value": "5"
+    }]
+  }],
+  "products": [
+    {
+      "name": "Fresho Apple - Royal Gala, Regular",
+      "imageUrl": "/images/products/apple.jpg",
+      "productUrl": "/p/184060007",
+      "imageAlt": "Fresho Apple - Royal Gala, Regular",
+      "description": "A combination of slightly tart tasting skin and honey floral tasting flesh, the Royal Gala apples, as the name suggests looks regal with beautiful golden coloured streaks. ",
+      "price": "0.24",
+      "promoEndDate": null,
+      "id": "184060007",
+      "pricePer": "0.59",
+      "promoDescription": null,
+      "substitutionValue": null,
+      "unitOfMeasure": "Lb",
+      "quantity": null,
+      "rating": 2,
+      "reviewCount": 100
+    },
+    {
+      "name": "Fresho Capsicum - Green, 500 g",
+      "imageUrl": "/images/products/capsicum-green.jpg",
+      "productUrl": "/p/960038585",
+      "imageAlt": "Fresho Capsicum - Green, 500 g",
+      "description": "Leaving a moderately pungent taste on the tongue, Green capsicums, also known as green peppers are bell shaped, medium-sized fruit pods. They have thick and shiny skin with a fleshy texture inside. ",
+      "price": "1.25",
+      "promoEndDate": null,
+      "id": "960038585",
+      "pricePer": "0.24",
+      "promoDescription": null,
+      "substitutionValue": null,
+      "unitOfMeasure": "Oz",
+      "quantity": null,
+      "rating": 5,
+      "reviewCount": 50
+    },
+    {
+      "name": "Fresho Kiwi - Green, 3 pcs",
+      "imageUrl": "/images/products/kiwi-green.jpg",
+      "productUrl": "/p/960106027",
+      "imageAlt": "",
+      "description": "Kiwis are oval shaped with a brownish outer skin. The flesh is bright green and juicy with tiny, edible black seeds. With its distinct sweet-sour taste and a pleasant smell, it tastes like strawberry and honeydew melon. ",
+      "price": "11.99",
+      "promoEndDate": null,
+      "id": "960106027",
+      "pricePer": "0.13",
+      "promoDescription": null,
+      "substitutionValue": null,
+      "unitOfMeasure": "Fz",
+      "quantity": null,
+      "rating": 4,
+      "reviewCount": 100
+    },
+    {
+      "name": "Fresho Pomegranate, 4 pcs (approx. 800 to 880 g)",
+      "imageUrl": "/images/products/pomegranate.jpg",
+      "productUrl": "/p/184570092",
+      "imageAlt": "",
+      "description": "With ruby color and an intense floral, sweet-tart flavor, the pomegranate delivers both taste and beauty. You can remove the skin and the membranes to get at the delicious fruit with nutty seeds. Fresho Pomegranates are finely sorted and graded to deliver the best tasting pomegranates to you. ",
+      "price": "0.50",
+      "promoEndDate": null,
+      "id": "184570092",
+      "pricePer": "1.99",
+      "promoDescription": null,
+      "substitutionValue": null,
+      "unitOfMeasure": "Lb",
+      "quantity": null,
+      "rating": 5,
+      "reviewCount": 1
+    },
+    {
+      "name": "Fresho Tomato - Local, Organically Grown, 500 g",
+      "imageUrl": "/images/products/tomato.jpg",
+      "productUrl": "/p/184570092",
+      "imageAlt": "",
+      "description": "Fresho brings to you an exquisite range of locally grown organic tomatoes, which are now available at bigbasket. These organic tomatoes are free from harmful pesticides and insecticides and thus have a very natural and tangy taste, which is attributed to its healthy soil growth. The ripe and firm tomatoes are a luscious addition to any meal.",
+      "price": "4.99",
+      "promoEndDate": null,
+      "id": "108010222",
+      "pricePer": "4.99",
+      "promoDescription": null,
+      "substitutionValue": null,
+      "unitOfMeasure": "Fz",
+      "quantity": null,
+      "rating": 3,
+      "reviewCount": 100
+    }
+  ]
+}

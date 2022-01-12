@@ -1,0 +1,31 @@
+enum PromoGroup {
+  Order
+  Shipping
+  Product
+}
+
+enum PromoType {
+  AmountOff
+  PercOff
+}
+
+input PromoDetails {
+  startDate: String
+  endDate: String
+  shortDescription: String
+  longDescription: String
+  promoGroup: PromoGroup
+  promoType: PromoType
+  condition: ConditionInput!
+  reward: RewardInput!
+}
+
+input ConditionInput {
+  minimumOrderAmount: Float
+  maximumDiscountAmount: Float
+}
+
+input RewardInput {
+  percOff: Float
+  amountOff: Float
+}

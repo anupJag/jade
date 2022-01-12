@@ -1,0 +1,41 @@
+input AddLocation {
+  latitude: Float!
+  longitude: Float!
+}
+
+input AddAddress {
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String!
+  country: String!
+  postalCode: String!
+}
+
+input AddWorkingHours {
+  openingTime: String
+  closingTime: String
+}
+
+input AddOpenHours {
+  mon: AddWorkingHours
+  tue: AddWorkingHours
+  wed: AddWorkingHours
+  thu: AddWorkingHours
+  fri: AddWorkingHours
+  sat: AddWorkingHours
+  sun: AddWorkingHours
+}
+
+input AddStore {
+  name: String!
+  address: AddAddress!
+  description: String
+  location: AddLocation!
+  contactNo: [String]!
+  openHours: AddOpenHours
+  openHourInfo: String
+  thumbnailImage: String!
+  images: [String!]
+  timezone: String!
+}

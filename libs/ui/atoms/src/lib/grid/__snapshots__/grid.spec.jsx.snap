@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Styled Component : Grid /> snapshot check for Grid's Styled components 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1q9iu3a"
+  >
+    <div
+      class="css-1taa2i3"
+    >
+      <div
+        class="css-1dmmwkm"
+      />
+    </div>
+  </div>
+  <div
+    class="css-1wgdrzt"
+  >
+    <div
+      class="css-1taa2i3"
+    >
+      <div
+        class="css-1uoq67m"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

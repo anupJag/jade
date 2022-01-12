@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jade-slot-booking
+  namespace: grocery-dev
+  labels:
+    app: jade-slot-booking
+spec:
+  type: ClusterIP
+  selector:
+    app: jade-slot-booking
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      name: jade-slot-booking

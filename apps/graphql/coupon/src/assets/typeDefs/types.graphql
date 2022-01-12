@@ -1,0 +1,21 @@
+type Condition {
+  minimumOrderAmount: Float
+  maximumDiscountAmount: Float
+}
+
+type Reward {
+  percOff: Float
+  amountOff: Float
+}
+
+type Promotion {
+  id: ID!
+  startDate: String
+  endDate: String
+  shortDescription: String
+  longDescription: String
+  promoGroup: String
+  promoType: String
+  condition: Condition!
+  reward: Reward!
+}

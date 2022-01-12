@@ -1,0 +1,8 @@
+type Query {
+  fetchPromotions: [Promotion]!
+  fetchApplicablePromotions(minOrderAmount: Float!): [Promotion]!
+}
+
+type Mutation {
+  createPromotion(promoDetails: PromoDetails!): Promotion!
+}

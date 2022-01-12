@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphql-gateway-configmap
+  namespace: grocery-dev
+data:
+  APP_NAME: JADE Gateway GraphQL
+  HOST: localhost
+  LOG_LEVEL: debug
+  PORT: "3000"
+  SERVICE_LIST: '[{"name": "Products", "url": "http://jade-graphql-products.grocery-dev:80/graphql/"}, {"name": "Content", "url": "http://jade-graphql-content.grocery-dev:80/graphql/"}, {"name": "Order", "url": "http://jade-graphql-order.grocery-dev:80/graphql/"}, {"name": "User", "url": "http://jade-graphql-user.grocery-dev:80/graphql/"}]'

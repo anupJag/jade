@@ -1,0 +1,8 @@
+type Query {
+  fetchCart(userId: ID!, offer: Offer): CartDetails!
+}
+
+type Mutation {
+  addToCart(details: AddToCart!): CartItem!
+  deleteFromCart(details: DeleteFromCart!): CartItem
+}

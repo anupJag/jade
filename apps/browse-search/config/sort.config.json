@@ -1,0 +1,14 @@
+[
+  {
+    "value": "pricing.list|1",
+    "label": "Price low to high"
+  },
+  {
+    "value": "pricing.list|-1",
+    "label": "Price high to low"
+  },
+  {
+    "value": "rating|-1",
+    "label": "Rating"
+  }
+]

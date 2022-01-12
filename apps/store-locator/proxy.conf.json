@@ -1,0 +1,9 @@
+{
+  "/store-locator-assets": {
+    "target": "http://localhost:4204",
+    "pathRewrite": {
+      "^/store-locator-assets/_next": "/_next"
+    },
+    "secure": false
+  }
+}

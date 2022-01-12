@@ -1,0 +1,6 @@
+input SlotData {
+  name: String!
+  date: String!
+  zipcode: Int!
+  orderId: String
+}

@@ -1,0 +1,18 @@
+ARG BASE_IMG
+FROM $BASE_IMG as BUILDER
+WORKDIR /usr/src/app
+
+FROM node:14.4.0-alpine
+
+ARG APP_NAME
+ARG APP_PATH
+WORKDIR /usr/src/app
+COPY --from=BUILDER /usr/src/app/dist/apps/graphql/${APP_PATH} .
+
+#TODO : OVERIDE PACKAGE JSON :: REMOVE BELOW 2 LAYER WHEN DIST BUNDLE IS FIXED
+COPY --from=BUILDER /usr/src/app/proxypackage/package.json package.json
+RUN yarn install --prod --frozen-lockfile
+
+EXPOSE ${PORT}
+
+CMD ["node", "main.js"]

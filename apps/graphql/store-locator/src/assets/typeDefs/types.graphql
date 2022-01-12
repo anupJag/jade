@@ -1,0 +1,42 @@
+type Location {
+  latitude: Float!
+  longitude: Float!
+}
+
+type Address {
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String!
+  country: String!
+  postalCode: String!
+}
+
+type WorkingHours {
+  openingTime: String
+  closingTime: String
+}
+
+type OpenHours {
+  mon: WorkingHours
+  tue: WorkingHours
+  wed: WorkingHours
+  thu: WorkingHours
+  fri: WorkingHours
+  sat: WorkingHours
+  sun: WorkingHours
+}
+
+type Store @key(fields: "id") {
+  id: ID!
+  name: String!
+  description: String
+  address: Address!
+  location: Location!
+  contactNo: [String]!
+  openHours: OpenHours
+  openHourInfo: String
+  thumbnailImage: String!
+  images: [String!]
+  timezone: String!
+}

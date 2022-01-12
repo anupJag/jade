@@ -1,0 +1,119 @@
+type Product @key(fields: "id") {
+  id: ID!
+  sku: String
+  title: String!
+  shortDescription: String
+  description: [String]
+  images: [ProductImage]
+  pricing: ProductPricing!
+  shipping: ProductShipping
+  unitOfMeasure: ProductUoM!
+  brand: ProductBrand
+  categories: [String!]
+  productUrl: String!
+  baseProductId: String
+  displayType: String
+  productType: String
+  maxQuantityAllowed: Int
+  isForSale: Boolean
+  marketingTags: [String]
+  shippingTags: [String]
+  rating: ProductRating
+}
+
+type ProductPricing {
+  list: Float
+  retail: Float
+  special: [ProductPricingSpecial]
+}
+
+type ProductPricingSpecial {
+  price: Float
+  from: String
+  to: String
+  amountSavings: Float
+  percentageSavings: Float
+}
+
+type ProductUoM {
+  unitType: String
+  minQty: Int
+  price: Float
+  displayText: String
+}
+
+type ProductShipping {
+  weight: Float
+  dimensions: ProductShippingDimensions
+}
+
+type ProductShippingDimensions {
+  width: Float
+  height: Float
+  depth: Float
+}
+
+type ProductImage {
+  url: String
+  altText: String
+  isDefault: Boolean
+}
+
+type ProductRating {
+  value: Int
+  count: Int
+}
+
+type ProductBrand {
+  name: String
+  brandType: String
+  description: String
+  disclaimer: String
+  manufacturerDetails: String
+}
+
+type Range {
+  start: String
+  end: String
+}
+
+type Value {
+  value: String
+  label: String
+}
+
+type Pagination {
+  totalDocs: Int
+  limit: Int
+  page: Int
+  totalPages: Int
+  pagingCounter: Int
+  hasPrevPage: Boolean
+  hasNextPage: Boolean
+  prevPage: Int
+  nextPage: Int
+}
+
+# There might be additional attributes for this type of filter
+type RangeFilter {
+  displayName: String
+  key: String
+  type: String
+  range: [Range]
+}
+
+# There might be additional attributes for this type of filter
+type ValueFilter {
+  displayName: String
+  key: String
+  type: String
+  range: [Value]
+}
+
+union Filter = RangeFilter | ValueFilter
+
+type ProductListType {
+  products: [Product!]!
+  filters: [Filter]
+  pagination: Pagination
+}

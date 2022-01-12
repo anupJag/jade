@@ -1,0 +1,4 @@
+#entity reference : stub : To Get Product details from Product schema
+extend type Product @key(fields: "id") {
+  id: ID! @external
+}

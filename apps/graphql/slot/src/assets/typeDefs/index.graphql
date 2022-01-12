@@ -1,0 +1,11 @@
+type Query {
+  fetchSlots(startDate: String!, endDate: String!, zipcode: Int!): [SlotAvailability]!
+  fetchSlotInfo: [SlotInformation]!
+  latestSlot(zipcode: Int!): SlotAvailability
+}
+
+type Mutation {
+  reserveSlot(details: SlotData!): BookedSlot
+  releaseSlot(id: ID!): BookedSlot
+  confirmSlot(id: ID!, orderId: ID!): BookedSlot
+}

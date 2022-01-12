@@ -1,0 +1,86 @@
+input PLPQueriesParams {
+  listCategory: String!
+  searchText: String
+  page: Int
+  sortStyle: Int
+  sortType: String
+  priceRange: String
+  rating: String
+  brands: String
+  deliveryType: String
+  discount: String
+  reviewCount: String
+}
+
+input AddProduct {
+  sku: String
+  title: String!
+  shortDescription: String
+  description: [String]
+  images: [ProductImageInput!]
+  pricing: ProductPricingInput!
+  shipping: ProductShippingInput
+  unitOfMeasure: ProductUoMInput
+  brand: ProductBrandInput
+  categories: [String!]
+  productUrl: String!
+  baseProductId: String
+  displayType: String
+  productType: String
+  maxQuantityAllowed: Int
+  isForSale: Boolean
+  marketingTags: [String]
+  shippingTags: [String]
+  rating: ProductRatingInput
+}
+
+input ProductPricingInput {
+  list: Float
+  retail: Float
+  special: [ProductPricingSpecialInput]
+}
+
+input ProductPricingSpecialInput {
+  price: Float
+  from: String
+  to: String
+  amountSavings: Float
+  percentageSavings: Float
+}
+
+input ProductUoMInput {
+  unitType: String
+  minQty: Int
+  price: Float
+  displayText: String
+}
+
+input ProductShippingInput {
+  weight: Float
+  dimensions: ProductShippingDimensionsInput
+}
+
+input ProductShippingDimensionsInput {
+  width: Float
+  height: Float
+  depth: Float
+}
+
+input ProductImageInput {
+  url: String
+  altText: String
+  isDefault: Boolean
+}
+
+input ProductRatingInput {
+  value: Int
+  count: Int
+}
+
+input ProductBrandInput {
+  name: String
+  brandType: String
+  description: String
+  disclaimer: String
+  manufacturerDetails: String
+}

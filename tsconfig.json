@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@jade/graphql/base": ["libs/graphql/base/src/index.ts"],
+      "@jade/utils": ["libs/utils/src/index.ts"],
+      "@jade/store": ["libs/store/src/index.ts"],
+      "@jade/store/types": ["libs/store/src/types.ts"],
+      "@jade/ui/atoms": ["libs/ui/atoms/src/index.ts"],
+      "@jade/ui/molecules": ["libs/ui/molecules/src/index.ts"],
+      "@jade/ui/molecules/types": ["libs/ui/molecules/src/types.ts"],
+      "@jade/ui/organism": ["libs/ui/organism/src/index.ts"],
+      "@jade/ui/organism/types": ["libs/ui/organism/src/types.ts"],
+      "@jade/ui/templates": ["libs/ui/templates/src/index.ts"],
+      "@jade/ui/themes": ["libs/ui/themes/src/index.ts"],
+      "@jade/ui/utils": ["libs/ui/utils/src/index.ts"],
+      "@jade/ui/abtests": ["libs/ui/abtests/src/index.ts"],
+      "@jade/graphql-client": ["libs/graphql-client/src/index.ts"],
+      "@jade/graphql-client/types": ["libs/graphql-client/src/types.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

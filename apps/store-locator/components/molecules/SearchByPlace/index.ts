@@ -1,0 +1,1 @@
+export { SearchByPlace } from './SearchByPlace';

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DrawerNavigation /> should render properly 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1q9iu3a"
+  >
+    <nav
+      class="css-1taa2i3"
+    >
+      <ul
+        class="css-spztfu"
+      />
+    </nav>
+  </div>
+</DocumentFragment>
+`;

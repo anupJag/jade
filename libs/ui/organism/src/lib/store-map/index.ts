@@ -1,0 +1,1 @@
+export { StoreMap } from './storeMap';

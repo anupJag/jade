@@ -1,0 +1,9 @@
+input AddCategory {
+  name: String!
+  categoryIdentifier: String!
+  isRootCategory: Boolean
+  parentId: String
+  image: String
+  children: AddCategory
+}
+

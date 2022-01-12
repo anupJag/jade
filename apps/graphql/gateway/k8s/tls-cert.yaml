@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: jade-graphql-gateway-tls
+  namespace: grocery-dev
+spec:
+  secretName: jade-graphql-gateway-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: graphql.instg.pscloudhub.com
+  dnsNames:
+    - graphql.instg.pscloudhub.com

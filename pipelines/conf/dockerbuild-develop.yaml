@@ -1,0 +1,6 @@
+docker:
+  dockerfile_path: './apps/web/Dockerfile'
+  registryname: 'harbor.instg.pscloudhub.com'
+  registrycreds: 'iris-goharbor'
+  imagename: 'iris/grocery-cwa:develop_${BUILD_NUMBER}'
+  dockerBuild_args: 'BRANCH=develop'

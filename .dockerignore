@@ -1,0 +1,14 @@
+node_modules
+.storybook
+pipelines
+pa11y
+docs
+dist
+cache
+builds
+.editorconfig
+.gitlab-ci.yml
+.README.md
+Dockerfile*
+Jenkinsfile*
+README.md

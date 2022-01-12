@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Link /> snapshot check 1`] = `
+<DocumentFragment>
+  <a
+    class="css-mzqm6m"
+  >
+     
+  </a>
+  <a
+    class="css-1u0qhwh"
+  >
+     
+    <svg
+      aria-hidden="true"
+      class="css-1im46kq"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+        fill="currentColor"
+      />
+    </svg>
+  </a>
+</DocumentFragment>
+`;

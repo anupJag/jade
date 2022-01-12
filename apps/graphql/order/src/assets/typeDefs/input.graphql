@@ -1,0 +1,26 @@
+enum PromoType {
+  AmountOff
+  PercOff
+}
+
+input AddToCart {
+  addedBy: String!
+  productId: String!
+  quantity: Int!
+}
+
+input DeleteFromCart {
+  addedBy: String!
+  id: ID!
+}
+
+input ApplyReward {
+  percOff: Float
+  amountOff: Float
+  maxDiscount: Float
+}
+
+input Offer {
+  promotionType: PromoType!
+  reward: ApplyReward!
+}

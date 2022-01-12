@@ -1,0 +1,13 @@
+{
+  "defaults": {
+    "chromeLaunchConfig": {
+      "executablePath": "/usr/bin/google-chrome-stable",
+      "ignoreHTTPSErrors": false,
+      "args": ["--no-sandbox"]
+     },
+      "timeout": 60000
+  },
+  "urls": [
+    "https://jade.instg.pscloudhub.com/"
+  ]
+}
