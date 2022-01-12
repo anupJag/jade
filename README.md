@@ -56,4 +56,4 @@ If you want to add ip address / any other confiuration in mongo clould. Log on h
 
 > Please provide Gmail id : `xtstarterkit@gmail.com` and password will be updated.
 
-## Jenkins URL: https://jenkins.in.pscloudhub.com/
+## Jenkins URL: 
